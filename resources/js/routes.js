@@ -1,6 +1,11 @@
-import AllPosts from './components/AllPosts.vue';
-import AddPost from './components/AddPost.vue';
 import EditPost from './components/EditPost.vue';
+import AddNewPost from './components/posts/AddNewPosts.vue';
+import AllPosts from './components/posts/AllPosts.vue';
+import MainMedia from './components/media/MainMedia.vue';
+
+
+
+
  
 export const routes = [
     {
@@ -9,13 +14,23 @@ export const routes = [
         component: AllPosts
     },
     {
-        name: 'add',
-        path: '/add',
-        component: AddPost
-    },
-    {
         name: 'edit',
         path: '/edit/:id',
         component: EditPost
-    }
+    },
+    {
+        name:'addnewpost',
+        path:'/addnew',
+        component:AddNewPost
+    },
+    {
+        name: 'allpost',
+        path: '/allpost',
+        component:AllPosts
+    },
+    {
+        name: 'mainmedia',
+        path: '/media',
+        component:MainMedia
+    },
 ];

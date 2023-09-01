@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PostController; 
+use App\Http\Controllers\API\MediaController; 
+
 
 
 /*
@@ -27,4 +29,6 @@ Route::get('posts', [PostController::class,'index']);
     Route::get('edit/{id}', [PostController::class,'edit']);
     Route::post('update/{id}', [PostController::class,'update']);
     Route::delete('delete/{id}', [PostController::class,'delete']);
-}); 
+});
+
+Route::get('/media',[MediaController::class,'index']);

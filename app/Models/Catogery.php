@@ -1,15 +1,14 @@
 <?php
- 
+
 namespace App\Models;
- 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
-class Post extends Model
+
+class Catogery extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'description','description','tag','featureimg'
+        'title', 'description','description','tag'
     ];
-
 }

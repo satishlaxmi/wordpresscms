@@ -1,9 +1,9 @@
+
 <template>
-    <div>
-        <h3 class="text-center">All Posts</h3><br/>
- 
-        <table class="table table-bordered">
-            <thead>
+    <div class="page-content">
+      <h3 class="text-center">All Posts</h3><br/>
+      <table class="table table-bordered">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
@@ -19,7 +19,7 @@
                 <td>{{ post.title }}</td>
                 <td>{{ post.description }}</td>
                 <td>{{ post.created_at }}</td>
-                <td>{{ post.updated_at }}</td>
+                <td>{{  post.updated_at }}</td>
                 <td>
                     <div class="btn-group" role="group">
                         <router-link :to="{name: 'edit', params: { id: post.id }}" class="btn btn-primary">Edit</router-link>
@@ -27,13 +27,14 @@
                     </div>
                 </td>
             </tr>
-            </tbody>
+            </tbody>      
         </table>
     </div>
-</template>
- 
-<script>
-import axios from 'axios'; // Import axios
+  </template>
+  
+  <script>
+  
+  import axios from 'axios'; // Import axios
 
 export default {
     data() {
@@ -58,4 +59,21 @@ export default {
         }
     }
 };
-</script>
+  </script>
+  
+  <style scoped>
+  .page-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 150px; /* Adjust this based on your sidebar width */
+  }
+  
+  @media (max-width: 992px) {
+    .page-content {
+      padding-left: 0; /* Reset padding when sidebar is collapsed */
+    }
+  }
+  </style>
+  
+
+
