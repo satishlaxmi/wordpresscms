@@ -112,6 +112,7 @@ export default {
         this.post.featureImage = URL.createObjectURL(selectedFile); // Display a preview
       }
     },
+    
   mounted() {
     // Call the getCatogery method when the component is mounted
     this.getCatogery();
