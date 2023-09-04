@@ -7,25 +7,30 @@
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" id="title" class="form-control" v-model="post.title">
+                <span class="text-danger" v-if="validationErrors.name">{{ validationErrors.title.toString() }}</span>
             </div>
             <div class="mb-3">
               <label for="content" class="form-label">Content</label>
               <textarea id="description" class="form-control" rows="6" v-model="post.description"></textarea>
+              <span class="text-danger" v-if="validationErrors.slug">{{ validationErrors.title.toString() }}</span>
             </div>
-            <div class="form-row">
+    
               <div class="col">
                 <label for="tag" class="form-label">Tag</label>
                 <textarea id="tag" class="form-control" rows="1" v-model="post.tag"></textarea>
+                <span class="text-danger" v-if="validationErrors.title">{{ validationErrors.title.toString() }}</span>
               </div>
-              <div class="col">
-                <label for="categories" class="form-label">Categories</label>
-                <select id="categories" class="form-control" v-model="post.categories" multiple>
-                <option value="category1">Cate  gory 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
-              </select>
-              </div>
+              
+              <div class="mb-3">
+            <label for="categories" class="form-label">Categories</label>
+            {{ catogerylist }}
+            <select id="categories" class="form-control" v-model="post.categories" multiple>
+              <option v-for="categoryItem in catogerylist" :key="categoryItem.name" :value="categoryItem.name">
+                {{ categoryItem.name }}
+              </option>
+            </select>
           </div>
+                
           <div class="mb-3">
           <label for="featureImage" class="form-label">Feature Image</label>
           <input type="file" id="featureImage" class="form-control-file" @change="handleImageUpload">
@@ -50,6 +55,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      catogerylist: [],
+      validationErrors: {},
       post: {
         title: '',
         description: '',
@@ -60,6 +67,16 @@ export default {
     };
   },
   methods: {
+    getCatogery() {
+      axios
+        .get('http://localhost:8000/api/catogery/get')
+        .then(response => {
+          this.catogerylist = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     addPost() {
       // Create a FormData object and append form data
       const formData = new FormData();
@@ -70,17 +87,23 @@ export default {
       formData.append('featureImage', this.post.featureImageFile); // Append the image file
 
       axios
-        .post('http://localhost:8000/api/post/add', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data', // Set the content type for FormData
-          },
-        })
-        .then(response => {
-          this.$router.push({ name: 'home' });
-        })
-        .catch(error => {
+    .post('http://localhost:8000/api/post/add', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(response => {
+      // Handle success
+      this.$router.push({ name: 'home' });
+    })
+    .catch(error => {
+        if (error.response.status === 422) {
+          // Validation failed, populate validationErrors object
+          this.validationErrors = error.response.data.errors;
+        } else {
           console.log(error);
-        });
+        }
+    });
     },
     handleImageUpload(event) {
       const selectedFile = event.target.files[0];
@@ -89,6 +112,10 @@ export default {
         this.post.featureImage = URL.createObjectURL(selectedFile); // Display a preview
       }
     },
+  mounted() {
+    // Call the getCatogery method when the component is mounted
+    this.getCatogery();
+  },
   },
 };
 </script>

@@ -54,7 +54,7 @@ export default {
       } else if (newValue === 'addnew') {
         this.$router.push('/addnew');
       } else if (newValue === 'category') {
-        this.$router.push('/categories');
+        this.$router.push('/catogery');
       } else if (newValue === 'tag') {
         this.$router.push('/tags');
       }

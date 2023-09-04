@@ -1,7 +1,9 @@
-import EditPost from './components/EditPost.vue';
+import EditPost from './components/posts/EditPost.vue';
 import AddNewPost from './components/posts/AddNewPosts.vue';
 import AllPosts from './components/posts/AllPosts.vue';
 import MainMedia from './components/media/MainMedia.vue';
+import Catogery from './components/catogery/maincatogery.vue';
+
 
 
 
@@ -32,5 +34,10 @@ export const routes = [
         name: 'mainmedia',
         path: '/media',
         component:MainMedia
+    },
+    {
+        name: 'catogery',
+        path: '/catogery',
+        component:Catogery
     },
 ];

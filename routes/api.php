@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PostController; 
 use App\Http\Controllers\API\MediaController; 
+use App\Http\Controllers\API\CatogeryController ; 
+
 
 
 
@@ -24,11 +26,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('posts', [PostController::class,'index']);
-    Route::group(['prefix' => 'post'], function () {
+
+//route group for the posts
+Route::group(['prefix' => 'post'], function () {
     Route::post('add', [PostController::class,'add']);
     Route::get('edit/{id}', [PostController::class,'edit']);
     Route::post('update/{id}', [PostController::class,'update']);
     Route::delete('delete/{id}', [PostController::class,'delete']);
 });
 
+//route group for the catogery 
+Route::group(['prefix'=>'catogery'],function(){
+    Route::post('add',[CatogeryController::class,'add']);
+    Route::get('get',[CatogeryController::class,'getCatogeries']);
+});
+
 Route::get('/media',[MediaController::class,'index']);
+

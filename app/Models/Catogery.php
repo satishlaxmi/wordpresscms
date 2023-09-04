@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Catogery extends Model
 {
-    use HasFactory;
+    protected $table='catogery';
+    use  HasFactory;
     protected $fillable = [
-        'title', 'description','description','tag'
+        'name',
+        'slug',
+        'parent',
     ];
 }
