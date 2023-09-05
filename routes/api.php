@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PostController; 
 use App\Http\Controllers\API\MediaController; 
 use App\Http\Controllers\API\CatogeryController ; 
+use App\Http\Controllers\API\MenuController ; 
+
 
 
 
@@ -40,6 +42,13 @@ Route::group(['prefix'=>'catogery'],function(){
     Route::post('add',[CatogeryController::class,'add']);
     Route::get('get',[CatogeryController::class,'getCatogeries']);
 });
+
+//route group for the menu 
+Route::group(['prefix'=>'menu'],function(){
+    Route::post('add',[MenuController::class,'add']);
+    Route::get('get',[MenuController::class,'getMenu']);
+});
+
 
 Route::get('/media',[MediaController::class,'index']);
 

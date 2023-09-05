@@ -35,12 +35,8 @@
           <label for="featureImage" class="form-label">Feature Image</label>
           <input type="file" id="featureImage" class="form-control-file" @change="handleImageUpload">
             <img
-              v-if="post.featureImage"
-              :src="post.featureImage"
-              alt="Feature Image"
-              class="mt-2 img-fluid"
-              style="max-width: 200px; max-height: 200px;" 
-            >
+              v-if="post.featureImage" :src="post.featureImage" alt="Feature Image" class="mt-2 img-fluid"
+              style="max-width: 200px; max-height: 200px;" >
         </div>
             <button type="submit" class="btn btn-primary">Publish</button>
           </form>
@@ -66,7 +62,7 @@ export default {
       },
     };
   },
-  methods: {
+  methods:{
     getCatogery() {
       axios
         .get('http://localhost:8000/api/catogery/get')

@@ -31,7 +31,6 @@ class CatogeryController extends Controller
         }
         
     }
-
     public function getCatogeries(){
         $categories = Catogery::get();
         if($categories){
